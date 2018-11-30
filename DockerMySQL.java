@@ -51,7 +51,7 @@ public class DockerMySQL {
          case 1:   
             ResultSet rs = stmt.executeQuery(sql);
                while(rs.next()){
-                  System.out.println("ID: " + rs.getInt(1)+", Imie: " + rs.getString(2)", Nazwisko: " + rs.getString(3));
+                  System.out.println("ID: " + rs.getInt(1)+", Imie: " + rs.getString(2)+", Nazwisko: " + rs.getString(3));
                }
             rs.close();
             break;
