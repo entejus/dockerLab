@@ -16,8 +16,16 @@ public class DockerMySQL {
       Class.forName("com.mysql.jdbc.Driver");
 
       System.out.println("Connecting to database...");
-      conn = DriverManager.getConnection(DB_URL,USER,PASS);
-
+      Boolean connect = false;
+      while(connect)
+      {
+         try {
+            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+         }
+         catch(Exception e) {
+            System.out.println("Connecting to database...");
+         }
+      }
       stmt = conn.createStatement();
       String dropTable,createTable,initInsert,insert,sql;
       
@@ -34,9 +42,9 @@ public class DockerMySQL {
       sql = "SELECT * FROM Osoby";
       insert = "INSERT INTO Osoby (IdOsoby, imie, nazwisko) VALUES";
       
-      Console input = System.console();
+      Scanner input = new Scanner(System.in);
       
-      String id;
+      int id;
       String imie,nazwisko;
            
       Boolean exit = false;
@@ -47,28 +55,28 @@ public class DockerMySQL {
       System.out.println("[2] Dodaj encję");
       System.out.println("[3] Wyjdź");
       
-      String option = input.readLine();
+      int option = input.nextInt();
          
       switch(option) {
-         case "1":   
+         case 1:   
             ResultSet rs = stmt.executeQuery(sql);
                while(rs.next()){
                   System.out.println("ID: " + rs.getInt(1)+", Imie: " + rs.getString(2)+", Nazwisko: " + rs.getString(3));
                }
             rs.close();
             break;
-         case "2":
+         case 2:
             System.out.println("Podaj IdOsoby:");
-            id = input.readLine();
+            id = input.nextInt();
             System.out.println("Podaj imie:");
-            imie = input.readLine();
+            imie = input.next();
             System.out.println("Podaj nazwisko:");
-            nazwisko = input.readLine();
+            nazwisko = input.next();
             
             insert+=" ("+id+",'"+imie+"','"+nazwisko+"');";
             stmt.executeUpdate(insert);
             break;
-         case "3":
+         case 3:
             exit = true;
             break;
          default:
