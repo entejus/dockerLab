@@ -55,7 +55,7 @@ public class DockerMySQL {
                }
             rs.close();
             break;
-         case 2
+         case 2:
             System.out.println("Podaj IdOsoby:");
             id = input.nextInt();
             System.out.println("Podaj imie:");
