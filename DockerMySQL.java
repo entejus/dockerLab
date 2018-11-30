@@ -19,11 +19,11 @@ public class DockerMySQL {
       stmt = conn.createStatement();
       String createTable,initInsert,sql;
       createTable = "CREATE TABLE Osoby (IdOsoby int, imie varchar(255), nazwisko varchar(255));";
-      stmt.executeQuery(createTable);
+      stmt.executeUpdate(createTable);
      
       initInsert = "INSERT INTO Osoby (IdOsoby, imie, nazwisko) VALUES (1,'Jan','Kowalski')"+
                     ",(2,'Izabela','Kowal'),(3,'Krzysztof','Jarzyna');";
-      stmt.executeQuery(initInsert);
+      stmt.executeUpdate(initInsert);
      
       sql = "SELECT IdOsoby,imie,nazwisko FROM Osoby";
         
