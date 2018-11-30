@@ -48,14 +48,14 @@ public class DockerMySQL {
       String option = input.nextLine();
          
       switch(option) {
-         case '1':   
+         case "1":   
             ResultSet rs = stmt.executeQuery(sql);
                while(rs.next()){
                   System.out.println("ID: " + rs.getInt(1)+", Imie: " + rs.getString(2)+", Nazwisko: " + rs.getString(3));
                }
             rs.close();
             break;
-         case '2':
+         case "2":
             System.out.println("Podaj IdOsoby:");
             id = input.nextLine();
             System.out.println("Podaj imie:");
@@ -66,7 +66,7 @@ public class DockerMySQL {
             insert+=" ("+id+",'"+imie+"','"+nazwisko+"');";
             stmt.executeUpdate(insert);
             break;
-         case '3':
+         case "3":
             exit = true;
             break;
          default:
