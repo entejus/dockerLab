@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.util.Scanner;
 
 public class DockerMySQL {
    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
@@ -17,7 +18,11 @@ public class DockerMySQL {
       conn = DriverManager.getConnection(DB_URL,USER,PASS);
 
       stmt = conn.createStatement();
-      String createTable,initInsert,sql;
+      String dropTable,createTable,initInsert,insert,sql;
+      
+      dropTable = "DROP TABLE IF EXISTS Osoby";
+      stmt.executeUpdate(dropTable);
+      
       createTable = "CREATE TABLE Osoby (IdOsoby int, imie varchar(255), nazwisko varchar(255));";
       stmt.executeUpdate(createTable);
      
@@ -25,21 +30,49 @@ public class DockerMySQL {
                     ",(2,'Izabela','Kowal'),(3,'Krzysztof','Jarzyna');";
       stmt.executeUpdate(initInsert);
      
-      sql = "SELECT IdOsoby,imie,nazwisko FROM Osoby";
-        
-     
-      ResultSet rs = stmt.executeQuery(sql);
-
-      while(rs.next()){
-         int id  = rs.getInt("IdOsoby");
-         String imie = rs.getString("imie");
-         String nazwisko = rs.getString("nazwisko");
-
-         System.out.println("ID: " + id);
-         System.out.println(", Imie: " + imie);
-         System.out.println(", Nazwisko: " + nazwisko);
+      sql = "SELECT * FROM Osoby";
+      insert = "INSERT INTO Osoby (IdOsoby, imie, nazwisko) VALUES";
+      
+      Scanner input = new Scanner(System.in);
+      int id;
+      String imie,nazwisko;
+           
+      Boolean exit = false;
+      
+      while(!exit) { 
+      System.out.println("Wybierz jedną z opcji(wprowadź odpowiednią cyfrę):");
+      System.out.println("[1] Wyświetl zawartość bazy");
+      System.out.println("[2] Dodaj encję");
+      System.out.println("[3] Wyjdź");
+      
+      String option = input.nextInt();
+         
+      switch(option) {
+         case 1:   
+            ResultSet rs = stmt.executeQuery(sql);
+               while(rs.next()){
+                  System.out.println("ID: " + rs.getInt(1)+", Imie: " + rs.getString(2)", Nazwisko: " + rs.getString(3));
+               }
+            rs.close();
+            break;
+         case 2:
+            System.out.println("Podaj IdOsoby:");
+            id = input.nextInt();
+            System.out.println("Podaj imie:");
+            imie = input.nextString();
+            System.out.println("Podaj nazwisko:");
+            nazwisko = input.nextString();
+            
+            insert+=" ("+id+",'"+imie+"','"+nazwisko+"');";
+            stmt.executeUpdate(insert);
+            break;
+         case 3:
+            exit = true;
+            break;
+         default:
+            System.out.println("Nie ma takiej opcji");
+            }
       }
-      rs.close();
       stmt.close();
       conn.close();
    }catch(SQLException se){
