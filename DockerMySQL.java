@@ -1,5 +1,6 @@
 import java.sql.*;
 import java.util.Scanner;
+import java.io.Console;
 
 public class DockerMySQL {
    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
