@@ -17,14 +17,16 @@ public class DockerMySQL {
 
       System.out.println("Connecting to database...");
       Boolean connect = false;
+    
       while(!connect)
       {
          try {
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
             connect = true;
          }
-         catch(Exception e) {
+         catch(Exception e) {          
             System.out.println("Connecting to database...");
+            Thread.sleep(1000);
          }
       }
       stmt = conn.createStatement();
@@ -49,6 +51,7 @@ public class DockerMySQL {
       String imie,nazwisko;
            
       Boolean exit = false;
+     
       
       while(!exit) { 
       System.out.println("Wybierz jedną z opcji(wprowadź odpowiednią cyfrę):");
