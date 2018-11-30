@@ -35,7 +35,7 @@ public class DockerMySQL {
       
       Scanner input = new Scanner(System.in);
       
-      String id,imie,nazwisko;
+      String option,id,imie,nazwisko;
            
       Boolean exit = false;
       
@@ -45,7 +45,7 @@ public class DockerMySQL {
       System.out.println("[2] Dodaj encję");
       System.out.println("[3] Wyjdź");
       
-      String option = input.nextLine();
+      while(input.hasNextLine()) option = input.nextLine();
          
       switch(option) {
          case "1":   
@@ -57,11 +57,11 @@ public class DockerMySQL {
             break;
          case "2":
             System.out.println("Podaj IdOsoby:");
-            id = input.nextLine();
+            while(input.hasNextLine()) id = input.nextLine();
             System.out.println("Podaj imie:");
-            imie = input.nextLine();
+            while(input.hasNextLine()) imie = input.nextLine();
             System.out.println("Podaj nazwisko:");
-            nazwisko = input.nextLine();
+            while(input.hasNextLine()) nazwisko = input.nextLine();
             
             insert+=" ("+id+",'"+imie+"','"+nazwisko+"');";
             stmt.executeUpdate(insert);
