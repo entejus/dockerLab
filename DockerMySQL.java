@@ -17,10 +17,11 @@ public class DockerMySQL {
 
       System.out.println("Connecting to database...");
       Boolean connect = false;
-      while(connect)
+      while(!connect)
       {
          try {
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
+            connect = true;
          }
          catch(Exception e) {
             System.out.println("Connecting to database...");
