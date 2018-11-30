@@ -45,7 +45,7 @@ public class DockerMySQL {
       System.out.println("[2] Dodaj encję");
       System.out.println("[3] Wyjdź");
       
-      int option = input.nextLine();
+      String option = input.nextLine();
          
       switch(option) {
          case '1':   
