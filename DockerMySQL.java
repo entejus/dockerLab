@@ -35,7 +35,8 @@ public class DockerMySQL {
       
       Scanner input = new Scanner(System.in);
       
-      String id,imie,nazwisko;
+      int id;
+      String imie,nazwisko;
            
       Boolean exit = false;
       
