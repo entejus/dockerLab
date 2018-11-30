@@ -45,7 +45,7 @@ public class DockerMySQL {
       System.out.println("[2] Dodaj encję");
       System.out.println("[3] Wyjdź");
       
-      String option = input.nextInt();
+      int option = input.nextInt();
          
       switch(option) {
          case 1:   
@@ -59,9 +59,9 @@ public class DockerMySQL {
             System.out.println("Podaj IdOsoby:");
             id = input.nextInt();
             System.out.println("Podaj imie:");
-            imie = input.nextString();
+            imie = input.nextLine();
             System.out.println("Podaj nazwisko:");
-            nazwisko = input.nextString();
+            nazwisko = input.nextLine();
             
             insert+=" ("+id+",'"+imie+"','"+nazwisko+"');";
             stmt.executeUpdate(insert);
